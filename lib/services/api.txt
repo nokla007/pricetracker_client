@@ -1,0 +1,33 @@
+void toggleFavoriteStatus(String productID, String userId, bool isFavorite) async {
+    final oldStatus = isFavorite;
+    notifyListeners();
+    final url =
+        'https://flutter-shop-app-9c8b0.firebaseio.com/userFavorites/$userId/$id.json?auth=$token';
+    try {
+      final response = await http.put(
+        url,
+        body: json.encode(
+          isFavorite,
+        ),
+      );
+      if (response.statusCode >= 400) {
+        _setFavValue(oldStatus);
+        notifyListeners();
+      }
+    } catch (error) {
+      _setFavValue(oldStatus);
+      notifyListeners();
+    }
+}
+
+
+
+Future<List<Product>> getProducts() async {
+    final response = await http.get(baseUrl);
+    if (response.statusCode == 200) {
+      final List<dynamic> body = json.decode(response.body);
+      return body.map((dynamic item) => Product.fromJson(item)).toList();
+    } else {
+      throw Exception('Failed to load products');
+    }
+  }
