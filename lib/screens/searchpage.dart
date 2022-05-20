@@ -42,14 +42,14 @@ class _SearchPageState extends State<SearchPage> {
                 print('url');
                 Product product = await ProductService(
                         context.read<Authentication>().currentUser ?? user)
-                    .fetchProduct(searchtext);
+                    .fetchProduct(searchtext).timeout(Duration(seconds: 30));
                 products = [product];
                 print('got result');
               } else {
                 print('not url');
                 products = await ProductService(
                         context.read<Authentication>().currentUser ?? user)
-                    .searchProduct(searchtext);
+                    .searchProduct(searchtext).timeout(Duration(seconds: 30));
                 print('got result');
               }
               _searchController.clear();

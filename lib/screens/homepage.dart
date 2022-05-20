@@ -9,9 +9,9 @@ import '../models/product.dart';
 import '../services/authentication.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key, required this.user}) : super(key: key);
   static const String id = 'homepage';
-  final User user = User(id: 33, email: 'oke@email.com');
+  final User user;
 
   @override
   State<HomePage> createState() => _HomePageState();

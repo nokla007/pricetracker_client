@@ -69,15 +69,31 @@ class SignInPage extends StatelessWidget {
               children: [
                 const Text('Don\'t have an account?'),
                 TextButton(
-                    onPressed: () {
-                      context.read<Authentication>().toggleHaveAccount();
-                    },
-                    child: const Text(
-                      'Sign Up!',
-                      style: TextStyle(color: Colors.red),
-                    ))
+                  onPressed: () {
+                    context.read<Authentication>().toggleHaveAccount();
+                  },
+                  child: const Text(
+                    'Sign Up!',
+                    style: TextStyle(color: Colors.red),
+                  ),
+                ),
               ],
             ),
+            const SizedBox(
+              height: 30,
+            ),
+            TextButton(
+              child: Text(
+                'Continue without sign in',
+                style: TextStyle(
+                  color: Colors.deepOrange,
+                ),
+              ),
+              onPressed: () {
+                context.read<Authentication>().anonymousSignIn();
+                // print(context.read<Authentication>().currentUser);
+              },
+            )
           ],
         ),
       ),

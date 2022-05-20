@@ -58,6 +58,11 @@ class Authentication extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<void> anonymousSignIn() async {
+    _currentUser = User.fromJson(userjson);
+    notifyListeners();
+  }
+
   Future<void> signOut() async {
     _currentUser = null;
     notifyListeners();
@@ -69,4 +74,4 @@ class Authentication extends ChangeNotifier {
   }
 }
 
-var userjson = {"id": 6, "email": "kaask@sasa.com"};
+var userjson = {"id": 0, "email": "anonymous@email.com"};

@@ -24,49 +24,50 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (BuildContext context) => Authentication(),
       child: MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        // home: const AuthWrapper(),
-        home: HomePage(),
+        home: const AuthWrapper(),
+        
       ),
     );
   }
 }
 
-// class AuthWrapper extends StatelessWidget {
-//   const AuthWrapper({Key? key}) : super(key: key);
+class AuthWrapper extends StatelessWidget {
+  const AuthWrapper({Key? key}) : super(key: key);
 
-//   @override
-//   Widget build(BuildContext context) {
-//     User? currentUser = context.watch<Authentication>().currentUser;
-//     if (currentUser != null) {
-//       return HomePage(user:currentUser);
-//     } else {
-//       return const AuthScreen();
-//     }
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    User? currentUser = context.watch<Authentication>().currentUser;
+    if (currentUser != null) {
+      return HomePage(user:currentUser);
+    } else {
+      return const AuthScreen();
+    }
+  }
+}
 
-// class AuthScreen extends StatelessWidget {
-//   const AuthScreen({Key? key}) : super(key: key);
-//   @override
-//   Widget build(BuildContext context) {
-//     bool haveAccount = context.watch<Authentication>().haveAccount;
-//     return Scaffold(
-//       body: Padding(
-//         padding: const EdgeInsets.all(20),
-//         child: showPage(haveAccount),
-//       ),
-//     );
-//   }
+class AuthScreen extends StatelessWidget {
+  const AuthScreen({Key? key}) : super(key: key);
+  @override
+  Widget build(BuildContext context) {
+    bool haveAccount = context.watch<Authentication>().haveAccount;
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(20),
+        child: showPage(haveAccount),
+      ),
+    );
+  }
 
-//   Widget showPage(bool hasAccount) {
-//     if (hasAccount) {
-//       return SignInPage();
-//     } else {
-//       return SignUpPage();
-//     }
-//   }
-// }
+  Widget showPage(bool hasAccount) {
+    if (hasAccount) {
+      return SignInPage();
+    } else {
+      return SignUpPage();
+    }
+  }
+}
